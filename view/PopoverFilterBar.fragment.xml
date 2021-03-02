@@ -1,0 +1,110 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:smartTable="sap.ui.comp.smarttable" xmlns:l="sap.ui.layout"
+	xmlns:data="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Popover showHeader="false" placement="Bottom">
+		<l:VerticalLayout width="60rem">
+			<IconTabBar id="idIconTabFilterBar" expanded="{device>/isNoPhone}">
+				<items>
+					<IconTabFilter id="TS" text="{i18n>PopoverFilterBarTS}">
+						<smartFilterBar:SmartFilterBar id="idTSsmartFilterBar" entitySet="FilterTechsystemSet" filterBarExpanded="true" width="54rem">
+							<smartFilterBar:controlConfiguration>
+								<smartFilterBar:ControlConfiguration key="ExtendedSID" visibleInAdvancedArea="true" preventInitialDataFetchInValueHelpDialog="false"
+									index="0" groupId="_BASIC">
+									<smartFilterBar:customControl>
+										<MultiInput id="idTSFilterTechSystem" suggestionItems="{/FilterTechsystemSet}" suggest="onTextChangeTechsystem">
+											<core:Item key="{ExtendedSID}" text="{Id}"></core:Item>
+										</MultiInput>
+									</smartFilterBar:customControl>
+								</smartFilterBar:ControlConfiguration>
+								<smartFilterBar:ControlConfiguration key="SystemType" visibleInAdvancedArea="true" preventInitialDataFetchInValueHelpDialog="false"
+									index="1"/>
+								<smartFilterBar:ControlConfiguration key="ITAdminRole" visibleInAdvancedArea="true" preventInitialDataFetchInValueHelpDialog="false"
+									index="2"/>
+							</smartFilterBar:controlConfiguration>
+						</smartFilterBar:SmartFilterBar>
+						<smartTable:SmartTable id="idTSsmartTable" smartFilterId="idTSsmartFilterBar" entitySet="FilterTechsystemSet" tableType="ResponsiveTable"
+							useExportToExcel="false" useVariantManagement="true" header="{i18n>PopoverFilterBarTS}" showRowCount="true" enableAutoBinding="false"
+							initiallyVisibleFields="ExtendedSID,SystemType,ITAdminRole" demandPopin="true" showFullScreenButton="true" beforeRebindTable="onRebindTable">
+							<Table id="idTableTS" mode="MultiSelect" selectionChange="onSelectionChange">
+								<items>
+									<ColumnListItem data:Id="{Id}" data:ContextType="{ContextType}"></ColumnListItem>
+								</items>
+							</Table>
+						</smartTable:SmartTable>
+					</IconTabFilter>
+					<IconTabFilter id="DB" text="{i18n>PopoverFilterBarDB}">
+						<smartFilterBar:SmartFilterBar id="idDBsmartFilterBar" entitySet="FilterDatabaseSet" width="54rem">
+							<smartFilterBar:controlConfiguration>
+								<smartFilterBar:ControlConfiguration key="ExtendedSID" visibleInAdvancedArea="true" preventInitialDataFetchInValueHelpDialog="false"
+									index="0">
+									<smartFilterBar:customControl>
+										<MultiInput id="idTSFilterDatabase" suggestionItems="{/FilterDatabaseSet}" suggest="onTextChangeDatabase">
+											<core:Item key="{ExtendedSID}" text="{Id}"></core:Item>
+										</MultiInput>
+									</smartFilterBar:customControl>
+								</smartFilterBar:ControlConfiguration>
+								<smartFilterBar:ControlConfiguration key="Vendor" visibleInAdvancedArea="true" preventInitialDataFetchInValueHelpDialog="false" index="1"/>
+							</smartFilterBar:controlConfiguration>
+						</smartFilterBar:SmartFilterBar>
+						<smartTable:SmartTable id="idDBsmartTable" smartFilterId="idDBsmartFilterBar" entitySet="FilterDatabaseSet" tableType="ResponsiveTable"
+							useExportToExcel="false" useVariantManagement="true" header="{i18n>PopoverFilterBarDB}" showRowCount="true" enableAutoBinding="false"
+							initiallyVisibleFields="ExtendedSID,Vendor,Type,Release" demandPopin="true" showFullScreenButton="true" beforeRebindTable="onRebindTable">
+							<Table id="idTableDB" mode="MultiSelect" selectionChange="onSelectionChange">
+								<items>
+									<ColumnListItem data:Id="{Id}" data:ContextType="{ContextType}"></ColumnListItem>
+								</items>
+							</Table>
+						</smartTable:SmartTable>
+					</IconTabFilter>
+					<IconTabFilter id="Host" text="{i18n>PopoverFilterBarHost}">
+						<smartFilterBar:SmartFilterBar id="idHostsmartFilterBar" entitySet="FilterHostSet" width="93%">
+							<smartFilterBar:controlConfiguration>
+								<smartFilterBar:ControlConfiguration key="Name" visibleInAdvancedArea="true" preventInitialDataFetchInValueHelpDialog="false" index="0">
+									<smartFilterBar:customControl>
+										<MultiInput id="idTSFilterHost" suggestionItems="{/FilterHostSet}" suggest="onTextChangeHost">
+											<core:Item key="{Name}" text="{Name}"></core:Item>
+										</MultiInput>
+									</smartFilterBar:customControl>
+								</smartFilterBar:ControlConfiguration>
+								<smartFilterBar:ControlConfiguration key="HostType" visibleInAdvancedArea="true" preventInitialDataFetchInValueHelpDialog="false" index="1"/>
+							</smartFilterBar:controlConfiguration>
+						</smartFilterBar:SmartFilterBar>
+						<smartTable:SmartTable id="idHostsmartTable" smartFilterId="idHostsmartFilterBar" entitySet="FilterHostSet" tableType="ResponsiveTable"
+							useExportToExcel="false" useVariantManagement="true" header="{i18n>PopoverFilterBarHost}" showRowCount="true" enableAutoBinding="false"
+							initiallyVisibleFields="Name,HostType,FullName,IP" demandPopin="true" showFullScreenButton="true" beforeRebindTable="onRebindTable">
+							<Table id="idTableHost" mode="MultiSelect" selectionChange="onSelectionChange">
+								<items>
+									<ColumnListItem data:Id="{Id}" data:ContextType="{ContextType}"></ColumnListItem>
+								</items>
+							</Table>
+						</smartTable:SmartTable>
+					</IconTabFilter>
+					<IconTabFilter id="Verf" text="{i18n>PopoverFilterBarVerf}">
+						<smartFilterBar:SmartFilterBar id="idVerfsmartFilterBar" entitySet="FilterVerfahrenSet" width="54rem">
+							<smartFilterBar:controlConfiguration>
+								<smartFilterBar:ControlConfiguration key="VerfKey" visibleInAdvancedArea="true" preventInitialDataFetchInValueHelpDialog="false" index="0"/>
+								<smartFilterBar:ControlConfiguration key="Sid" visibleInAdvancedArea="true" preventInitialDataFetchInValueHelpDialog="false" index="1"/>
+								<smartFilterBar:ControlConfiguration key="Type" visibleInAdvancedArea="true" preventInitialDataFetchInValueHelpDialog="false" index="2"/>
+							</smartFilterBar:controlConfiguration>
+						</smartFilterBar:SmartFilterBar>
+						<smartTable:SmartTable id="idVerfmartTable" smartFilterId="idVerfsmartFilterBar" entitySet="FilterVerfahrenSet" tableType="ResponsiveTable"
+							useExportToExcel="false" useVariantManagement="true" header="{i18n>PopoverFilterBarVerf}" showRowCount="true" enableAutoBinding="false"
+							initiallyVisibleFields="VerfKey,Text,Sid,Type" demandPopin="true" showFullScreenButton="true" beforeRebindTable="onRebindTable">
+							<Table id="idTableVerf" mode="MultiSelect" selectionChange="onSelectionChange">
+								<items>
+									<ColumnListItem data:Id="{Id}" data:ContextType="{ContextType}"></ColumnListItem>
+								</items>
+							</Table>
+						</smartTable:SmartTable>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</l:VerticalLayout>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button id="PopoverOk" text="{i18n>PopoverFilterBarOk}" type="Accept" press="handleOkPress"/>
+			</Toolbar>
+		</footer>
+	</Popover>
+</core:FragmentDefinition>

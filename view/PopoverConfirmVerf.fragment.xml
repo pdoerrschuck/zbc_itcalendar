@@ -1,0 +1,40 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
+	<Popover title="{i18n>WMMVerfConfirmTitle}" class="sapUiResponsivePadding" placement="Auto">
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button id="idWMMCreate" press="saveWMM" text="{i18n>WMMVerfConfirmYes}"/>
+				<ToolbarSeparator/>
+				<Button id="idWMMAbort" press="closePopoverConfirmVerf" text="{i18n>WMMVerfConfirmNo}"/>
+			</Toolbar>
+		</footer>
+		<VBox class="sapUiSmallMargin">
+			<Table id="tabProcess" items="{path: 'dependent>/process_data', templateShareable:false}" fixedLayout="false">
+				<headerToolbar>
+					<OverflowToolbar>
+						<Title text="{i18n>WMMVerfConfirmText}"/>
+						<ToolbarSpacer/>
+					</OverflowToolbar>
+				</headerToolbar>
+				<columns>
+					<Column>
+						<Text text="{i18n>WMMTableColumnVerfId}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>WMMTableColumnVerfName}"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem vAlign="Middle">
+						<cells>
+							<Text text="{dependent>verf_key}"/>
+						</cells>
+						<cells>
+							<Text text="{dependent>verf_desc}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</VBox>
+	</Popover>
+</core:FragmentDefinition>

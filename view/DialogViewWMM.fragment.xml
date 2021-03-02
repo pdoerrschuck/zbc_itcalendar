@@ -1,0 +1,137 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Dialog title="{i18n>WMMViewDialog}" contentWidth="100%" contentHeight="100%" afterOpen="onOpenWMMView" afterClose="onCloseWMMView">
+		<l:Grid id="main_grid" defaultSpan="L12 M12 S12" width="auto">
+			<l:content>
+				<f:SimpleForm id="WMM_Header_Form" maxContainerCols="2" editable="true" layout="ResponsiveGridLayout" title="{i18n>WMMViewSchedule}"
+					labelSpanL="2" labelSpanM="2" emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2" class="editableForm">
+					<f:content>
+						<core:Title text=""/>
+						<Label id="titleLBL" text="{i18n>WMMTitle}" required="true"/>
+						<Input id="titleInput" value="{Title}" enabled="false" tooltip="{i18n>WMMTitle}">
+							<layoutData>
+								<l:GridData id="titleGD" span="L6 M6 S4"/>
+							</layoutData>
+						</Input>
+						<Label id="typeLBL" text="{i18n>WMMType}" required="true"/>
+						<Select ariaLabelledBy="typeLBL" id="typeSelect" items="{/WMMTypeSet}" tooltip="{i18n>WMMType}" selectedKey="{Type}" enabled="false">
+							<core:Item id="typeItem" key="{WmType}" text="{WmDescription}" tooltip="{WmDescription}"/>
+							<layoutData>
+								<l:GridData id="typeGD" span="L6 M6 S4"/>
+							</layoutData>
+						</Select>
+						<Label id="categoryLBL" text="{i18n>WMMCategory}"/>
+						<Select id="categorySelect" items="{/WMMCategoriesSet}" ariaLabelledBy="categoryLBL" tooltip="{i18n>WMMCategory}" selectedKey="{Category}" enabled="false">
+							<core:Item id="categoryItem" key="{WmmCategoryId}" text="{WmmCategory}" tooltip="{WmmCategory}"/>
+							<layoutData>
+								<l:GridData id="categoryGD" span="L6 M6 S4"/>
+							</layoutData>
+						</Select>
+						<Label id="descLBL" text="{i18n>WMMDescription}"/>
+						<TextArea id="descTA" placeholder="{i18n>WMMDescriptionTooltip}" tooltip="{i18n>WMMDescription}" value="{Description}" enabled="false" rows="10"></TextArea>
+						<core:Title text=""/>
+						<Label id="startLBL" text="{i18n>WMMStart}" required="true"/>
+						<DatePicker ariaLabelledBy="startLBL" id="startDateDP" displayFormat="medium" tooltip="{i18n>WMMStartDateTooltip}"
+							change="onStartDateChange" value="{path: 'StartDate', formatter: '.formatter.formatWMMDate'}" valueFormat="dd.MM.yyyy" enabled="false" >
+							<layoutData>
+								<l:GridData id="startDateGD" span="L3 M3 S4"/>
+							</layoutData>
+						</DatePicker>
+						<TimePicker id="startTimeTP" tooltip="{i18n>WMMStartTimeTooltip}" 
+							value="{path: 'StartDate', formatter: '.formatter.formatWMMTime'}" displayFormat="HH:mm" enabled="false" >
+							<layoutData>
+								<l:GridData id="startTimeGD" span="L3 M3 S4"/>
+							</layoutData>
+						</TimePicker>
+						<Label id="endLBL" text="{i18n>WMMEnd}" required="true"/>
+						<DatePicker ariaLabelledBy="endLBL" id="endDateDP" displayFormat="medium" valueFormat="dd.MM.yyyy" tooltip="{i18n>WMMEndDateTooltip}"
+							value="{path: 'EndDate', formatter: '.formatter.formatWMMDate'}" enabled="false">
+							<layoutData>
+								<l:GridData id="endDateGD" span="L3 M3 S4"/>
+							</layoutData>
+						</DatePicker>
+						<TimePicker id="endTimeTP" value="{path: 'EndDate', formatter: '.formatter.formatWMMTime'}" displayFormat="HH:mm" tooltip="{i18n>WMMEndTimeTooltip}" enabled="false">
+							<layoutData>
+								<l:GridData id="endTimeGD" span="L3 M3 S4"/>
+							</layoutData>
+						</TimePicker>
+						<Label id="timezoneLBL" text="{i18n>WMMTimezone}"/>
+						<Input id="timezoneValue" ariaLabelledBy="timezoneLBL" value="{i18n>WMMTimezoneValue}" enabled="false">
+							<layoutData>
+								<l:GridData id="timezoneGD" span="L6 M6 S4"/>
+							</layoutData>
+						</Input>
+					</f:content>
+				</f:SimpleForm>
+			</l:content>
+		</l:Grid>
+		<VBox>
+			<items>
+				<IconTabBar applyContentPadding="true" id="WMMCreateTabbar">
+					<items>
+						<IconTabFilter id="compTabFilter" icon="sap-icon://add-equipment" key="technical_comp_tab" text="{i18n>WMMTechComp}"
+							tooltip="{i18n>WMMTechComp}">
+							<!-- Wichtig Shareable=false -->
+							<VBox id="mo_box" items="{path: 'dependentView>/panel_data', templateShareable:false}">
+								<Panel id="mo_dyn_panel_id" expandable="true" expanded="true" headerText="{dependentView>panel_name}" expand="expandMOPanel">
+									<headerToolbar>
+										<Toolbar id="mo_dyn_panelToolbar">
+											<Text text="{dependentView>panel_name}"/>
+											<ToolbarSpacer/>
+										</Toolbar>
+									</headerToolbar>
+									<f:SimpleForm id="depSimpleForm" maxContainerCols="3" layout="ResponsiveGridLayout" title="{i18n>WMMTechDepend}" labelSpanL="4"
+										labelSpanM="4" emptySpanL="0" emptySpanM="0" columnsL="3" columnsM="3" content="{dependentView>dependents}">
+										<core:Title text=""/>
+										<List mode='None' includeItemInSelection="true" items="{dependentView>dependents_for_mo}" headerText="{dependentView>MoTypeDesc}">
+											<CustomListItem type="Active">
+												<content>
+													<CheckBox select="onDependentSelected" selected="{dependentView>IsActive}"
+														enabled="false" text="{dependentView>MoContextName}"
+														app:parent="{dependentView>ParentMoContextId}" app:reference="{dependentView>RefMoContextId}"></CheckBox>
+												</content>
+											</CustomListItem>
+										</List>
+									</f:SimpleForm>
+									<Table id="tabProcDependents" items="{path: 'dependentView>proc_dependents', templateShareable:false}">
+										<headerToolbar>
+											<OverflowToolbar>
+												<Title text="{i18n>WMMVerfDepend}"/>
+												<ToolbarSpacer/>
+											</OverflowToolbar>
+										</headerToolbar>
+										<columns>
+											<Column>
+												<Text text="{i18n>WMMTableColumnVerfId}"/>
+											</Column>
+											<Column>
+												<Text text="{i18n>WMMTableColumnVerfName}"/>
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem vAlign="Middle">
+												<cells>
+													<Text text="{dependentView>verf_key}"/>
+												</cells>
+												<cells>
+													<Text text="{dependentView>verf_desc}"/>
+												</cells>
+											</ColumnListItem>
+										</items>
+									</Table>
+								</Panel>
+							</VBox>
+						</IconTabFilter>
+						<IconTabFilter></IconTabFilter>
+					</items>
+				</IconTabBar>
+			</items>
+		</VBox>
+		<beginButton>
+			<Button id="editButton" tooltip="{i18n>WMMButtonEdit}" enabled="false" icon="sap-icon://edit" press="onWMMViewEdit"/>
+		</beginButton>
+		<endButton>
+			<Button id="cancelButton" tooltip="{i18n>WMMButtonCancel}" icon="sap-icon://decline" press="onWMMViewCancel"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

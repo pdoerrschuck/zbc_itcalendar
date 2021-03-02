@@ -1,0 +1,79 @@
+{
+    "resources": [
+        {
+            "name": "Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "view/DialogCreateWMM.fragment.xml"
+        },
+        {
+            "name": "view/PopoverAttributes.fragment.xml"
+        },
+        {
+            "name": "view/DialogViewWMM.fragment.xml"
+        },
+        {
+            "name": "view/PopoverFilterBar.fragment.xml"
+        },
+        {
+            "name": "view/Main.view.xml"
+        },
+        {
+            "name": "view/PopoverConfirmVerf.fragment.xml"
+        },
+        {
+            "name": "i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "manifest.json"
+        },
+        {
+            "name": "css/style.css"
+        },
+        {
+            "name": "resources.json",
+            "merged": true
+        },
+        {
+            "name": ".user.project.json"
+        },
+        {
+            "name": "model/models.js"
+        },
+        {
+            "name": "controller/FilterBarFunctions.js"
+        },
+        {
+            "name": "controller/validation.js"
+        },
+        {
+            "name": "controller/Main.controller.js"
+        },
+        {
+            "name": "controller/formatter.js"
+        },
+        {
+            "name": "controller/CalendarFunctions.js"
+        },
+        {
+            "name": ".project.json"
+        },
+        {
+            "name": "Component.js"
+        },
+        {
+            "name": "neo-app.json"
+        },
+        {
+            "name": "libs/moment.js"
+        },
+        {
+            "name": "libs/momentTimezone.js"
+        },
+        {
+            "name": "index.html"
+        }
+    ]
+}

@@ -1,0 +1,67 @@
+<mvc:View controllerName="IT_CALENDAR.controller.Main" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
+	displayBlock="true" xmlns="sap.m" xmlns:tnt="sap.tnt" xmlns:unified="sap.ui.unified" xmlns:core="sap.ui.core">
+	<App>
+		<tnt:ToolPage id="toolPage">
+			<tnt:header>
+				<tnt:ToolHeader>
+					<Button id="sideNavigationToggleButton" icon="sap-icon://menu2" type="Transparent" press="onSideNavButtonPress">
+						<layoutData>
+							<OverflowToolbarLayoutData priority="NeverOverflow"/>
+						</layoutData>
+					</Button>
+					<ToolbarSpacer/>
+					<Title level="H1" text="{i18n>ToolbarTitle}">
+						<layoutData>
+							<OverflowToolbarLayoutData priority="NeverOverflow"/>
+						</layoutData>
+					</Title>
+					<ToolbarSpacer/>
+					<Button id="targets" icon="sap-icon://target-group" press="onPressTargets" tooltip="{i18n>ToolTipSystems}">
+						<layoutData>
+							<OverflowToolbarLayoutData priority="Low"/>
+						</layoutData>
+					</Button>
+					<Button id="btnUser" text="{Firstname} {Lastname}">
+						<layoutData>
+							<OverflowToolbarLayoutData priority="NeverOverflow"/>
+						</layoutData>
+					</Button>
+				</tnt:ToolHeader>
+			</tnt:header>
+			<tnt:sideContent>
+				<tnt:SideNavigation itemSelect="onItemSelect">
+					<tnt:fixedItem>
+						<tnt:NavigationList>
+							<tnt:NavigationListItem text="{i18n>IconHelp}" icon="sap-icon://sys-help"></tnt:NavigationListItem>
+						</tnt:NavigationList>
+					</tnt:fixedItem>
+				</tnt:SideNavigation>
+			</tnt:sideContent>
+			<tnt:mainContents>
+				<ScrollContainer class="sapUiSmallMargin" height="100%" horizontal="true" vertical="true" focusable="true">
+					<PlanningCalendar id="pc1" viewKey="Day" singleSelection="false" showIntervalHeaders="false" showEmptyIntervalHeaders="false"
+						showRowHeaders="true" appointmentsReducedHeight="false" appointmentsVisualization="Filled" appointmentSelect="onEventSelect"
+						rows="{/SystemeSet}">
+						<toolbarContent>
+							<Title text="{i18n>CalendarTitle}" titleStyle="H4"/>
+							<ToolbarSpacer/>
+							<Button id="btnWMM" text="{i18n>ComboBoxWMM}" press="onBtnWMMPress" enabled="false" />
+						</toolbarContent>
+						<rows>
+							<!--Die Zeilen werden im Javascript geladen, da ein Refresh auf das Binding nicht möglich ist-->
+							<PlanningCalendarRow title="{context_value}" text="{shortDescription}" appointments="{path:'Events', templateShareable:false}">
+								<appointments>
+									<unified:CalendarAppointment key="{EventID}"
+										startDate="{parts : [{ path: 'StartDate'}, {path: 'StartTime'}], formatter: '.formatter.dateTimeToDateObj'}"
+										endDate="{parts : [{ path: 'EndDate'}, {path: 'EndTime'}], formatter: '.formatter.dateTimeToDateObj'}" title="{Title}" icon="{Icon}"
+										text="{Category}" type="{path: 'Color', formatter: '.formatter.appointmentColorType'}"/>
+								</appointments>
+							</PlanningCalendarRow>
+							<!--Die Zeilen werden im Javascript geladen, da ein Refresh auf das Binding nicht möglich ist-->
+						</rows>
+					</PlanningCalendar>
+				</ScrollContainer>
+			</tnt:mainContents>
+		</tnt:ToolPage>
+	</App>
+</mvc:View>

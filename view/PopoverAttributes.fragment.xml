@@ -1,0 +1,36 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Popover title="{Title}" class="sapUiResponsivePadding" placement="Auto" initialFocus="idEventDetailsBtn" afterOpen="onOpenPopoverAttributes">
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button id="idEventDeleteBtn" icon="sap-icon://delete" press="onDeleteEvents" tooltip="{i18n>PopoverEventDeleteToolTip}" custom:EventID="{EventID}" enabled="false" />
+				<ToolbarSeparator/>
+				<Button id="idEventDetailsBtn" icon="sap-icon://generate-shortcut" press="onShowEventDetails" tooltip="{i18n>PopoverEventToolTip}" custom:WmmEventGuid="{WmmGuid}" />
+			</Toolbar>
+		</footer>
+		<VBox class="sapUiSmallMargin">
+			<f:SimpleForm editable="false" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12"
+				adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
+				singleContainerFullSize="false">
+				<f:content>
+					<Label text="{i18n>PopoverEventDetailsStart}"/>
+					<Text text="{parts : [{ path: 'StartDate'}, {path: 'StartTime'}], formatter: '.formatter.dateTimeToOutput'}"/>
+					<Label text="{i18n>PopoverEventDetailsEnd}"/>
+					<Text text="{parts : [{ path: 'EndDate'}, {path: 'EndTime'}], formatter: '.formatter.dateTimeToOutput'}"/>
+					<Label text="{i18n>PopoverEventDetailsTimeZone}"/>
+					<Text text="{TimezoneText}"/>
+					<Label text="{i18n>PopoverEventDetailsTyp}"/>
+					<Text text="{ApplicationText}"/>
+					<Label text="{i18n>PopoverEventDetailsCategory}"/>
+					<Text text="{CategoryText}"/>
+					<Label text="{i18n>PopoverEventCreate}"/>
+					<Text text="{CreatedBy}"/>
+					<Label text="{i18n>PopoverEventChange}"/>
+					<Text text="{ChangedBy}"/>
+					<Label text="{i18n>PopoverEventRecurring}"/>
+					<Text text="{path: 'Recurring', formatter: '.formatter.recurringFormat'}"/>
+				</f:content>
+			</f:SimpleForm>
+		</VBox>
+	</Popover>
+</core:FragmentDefinition>
